@@ -1,0 +1,5 @@
+# Dependances (regenerables via npm install)
+node_modules/
+
+# Documentation locale (ne pas publier sur GitHub)
+VALIDATION_DONNEES.md

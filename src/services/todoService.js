@@ -17,15 +17,6 @@ export const todoService = {
   },
 
   creer({ titre, termine = false }) {
-    if (typeof titre !== "string" || titre.trim() === "") {
-      throw new ErreurHttp(400, "Le champ 'titre' est requis", {
-        titre: "doit être une chaîne non vide",
-      });
-    }
-    if (typeof termine !== "boolean") {
-      throw new ErreurHttp(400, "Le champ 'termine' doit être un booléen");
-    }
-
     const todo = {
       id: store.prochainId++,
       titre: titre.trim(),
@@ -45,16 +36,9 @@ export const todoService = {
     const todo = store.todos[index];
 
     if (titre !== undefined) {
-      if (typeof titre !== "string" || titre.trim() === "") {
-        throw new ErreurHttp(400, "Le champ 'titre' doit être une chaîne non vide");
-      }
       todo.titre = titre.trim();
     }
-
     if (termine !== undefined) {
-      if (typeof termine !== "boolean") {
-        throw new ErreurHttp(400, "Le champ 'termine' doit être un booléen");
-      }
       todo.termine = termine;
     }
 

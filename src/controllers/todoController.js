@@ -1,13 +1,5 @@
 import { todoService } from "../services/todoService.js";
-import { ErreurHttp } from "../middlewares/ErreurHttp.js";
-
-const analyserId = (valeur) => {
-  const id = Number(valeur);
-  if (!Number.isInteger(id) || id <= 0) {
-    throw new ErreurHttp(400, "L'identifiant doit être un entier positif");
-  }
-  return id;
-};
+//import { ErreurHttp } from "../middlewares/ErreurHttp.js";
 
 export const todoController = {
   lister(req, res) {
@@ -16,7 +8,7 @@ export const todoController = {
 
   recuperer(req, res, next) {
     try {
-      const id = analyserId(req.params.id);
+      const id = req.todoId;
       res.json(todoService.recuperer(id));
     } catch (err) {
       next(err);
@@ -34,7 +26,7 @@ export const todoController = {
 
   modifier(req, res, next) {
     try {
-      const id = analyserId(req.params.id);
+      const id = req.todoId;
       const todo = todoService.modifier(id, req.body ?? {});
       res.json(todo);
     } catch (err) {
@@ -44,7 +36,7 @@ export const todoController = {
 
   supprimer(req, res, next) {
     try {
-      const id = analyserId(req.params.id);
+      const id = req.todoId;
       todoService.supprimer(id);
       res.status(204).end();
     } catch (err) {
